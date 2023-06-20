@@ -19,18 +19,19 @@ class Human
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['r-human', 'w-human'])]
+    #[Groups(['r-human'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['r-human', 'w-human'])]
+    #[Groups(['w-human', 'r-human', 'r-property'])]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'human', targetEntity: Cat::class, cascade: ["persist"])]
-    #[Groups(['r-human', 'w-human'])]
+    #[ORM\OneToMany(mappedBy: 'human', targetEntity: Cat::class, cascade: ["persist"], orphanRemoval: false)]
+    #[Groups(['w-human', 'r-human'])]
     private Collection $cats;
 
-    #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'humans')]
+    #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'humans', cascade: ["persist"], orphanRemoval: false)]
+    #[Groups(['w-human', 'r-human'])]
     private Collection $properties;
 
     #[ORM\OneToMany(mappedBy: 'human', targetEntity: Proposal::class)]

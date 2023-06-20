@@ -3,14 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Post;
 use App\Repository\ProposalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProposalRepository::class)]
 
 #[ApiResource]
-#[Post(validationContext: ['groups'=> ['Default', 'PostValidation' ]])]
 class Proposal
 {
     #[ORM\Id]

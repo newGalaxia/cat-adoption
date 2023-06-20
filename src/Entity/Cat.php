@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,26 +19,24 @@ class Cat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['r:cat'])]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 255)]
-    #[Groups(['r-cat', 'w-cat', 'w-human'])]
+    #[Groups(['w-cat', 'r-cat', 'w-human', 'r-property'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['r-cat', 'w-cat', 'w-human'])]
+    #[Groups(['w-cat',  'r-cat', 'w-human', 'r-property'])]
     private ?string $coatColor = null;
 
     #[ORM\Column(length: 1)]
-    #[Groups(['r:cat'])]
+    #[Groups(['w-cat',  'r-cat', 'w-human'])]
     private ?string $sex = null;
 
     #[ORM\ManyToOne(inversedBy: 'cats')]
-    #[Groups(['read:collection', 'write:collection'])]
     private ?Human $human = null;
 
-    #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'cats')]
+    #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'cats', cascade: ["persist"])]
     private Collection $properties;
 
     #[ORM\OneToMany(mappedBy: 'cat', targetEntity: Proposal::class)]
