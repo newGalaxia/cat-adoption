@@ -27,7 +27,7 @@ class Human
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'human', targetEntity: Cat::class, cascade: ["persist"], orphanRemoval: false)]
-    #[Groups(['w-human', 'r-human'])]
+    #[Groups(['r-human'])]
     private Collection $cats;
 
     #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'humans', cascade: ["persist"], orphanRemoval: false)]

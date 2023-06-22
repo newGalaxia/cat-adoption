@@ -19,18 +19,19 @@ class Cat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['r-cat'])]
     private ?int $id = null;
     
     #[ORM\Column(length: 255)]
-    #[Groups(['w-cat', 'r-cat', 'w-human', 'r-property'])]
+    #[Groups(['w-cat', 'r-cat', 'r-property'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['w-cat',  'r-cat', 'w-human', 'r-property'])]
+    #[Groups(['w-cat',  'r-cat', 'r-property'])]
     private ?string $coatColor = null;
 
     #[ORM\Column(length: 1)]
-    #[Groups(['w-cat',  'r-cat', 'w-human'])]
+    #[Groups(['w-cat',  'r-cat'])]
     private ?string $sex = null;
 
     #[ORM\ManyToOne(inversedBy: 'cats')]
