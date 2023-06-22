@@ -6,9 +6,9 @@ services:
     depends_on:
       - database
     ports:
-      - "9000:8000"
+      - "9001:8000"
     volumes:
-      - /home/sfournage/cat-adoption:/var/www/html
+      - /home/${KAMARADE}/cat-adoption:/var/www/html
   database:
     container_name: db-cat-adoption
     image: postgres:15
@@ -18,10 +18,10 @@ services:
       POSTGRES_PASSWORD: admin
       #POSTGRES_USER: admin
     ports:
-      - "5432:5432"
+      - "5666:5432"
   pgadmin:
     container_name: data-admin
     image: adminer
     restart: always
     ports:
-      - 5050:8080
+      - 5051:8080

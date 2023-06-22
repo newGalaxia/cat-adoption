@@ -30,14 +30,31 @@ Docker Compose version v2.18.1
 ```
 
 
-## Lancer l'API 
+## Initialiser l'API 
 
 ```
-Docker compose up -d 
+cd ~
+git clone git@github.com:newGalaxia/cat-adoption.git
+
 ```
+mettre à jour votre kamarade dans le .env puis
+
+```
+docker compose up -d
+docker exec -it hash-du-container-sf8 bash
+symfony console doctrine:schema:create
+
+```
+
 
 ## Stopper l'API
 
 ```
-Docker compose down -d 
+Docker compose down
+```
+
+## Démarrer l'API (quand linit a déjà été fait)
+
+```
+Docker compose up
 ```
