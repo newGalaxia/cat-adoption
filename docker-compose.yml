@@ -2,13 +2,27 @@ version: '3.7'
 services:
   php8-sf6:
     container_name: php8-sf6
-    build: ./docker
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
     depends_on:
       - database
     ports:
       - "9001:8000"
     volumes:
-      - /home/${KAMARADE}/cat-adoption:/var/www/html
+      - /home/sfournage/cat-adoption/api:/var/www/html
+
+  webui:
+    container_name: webui
+    build:
+      context: .
+      dockerfile: docker/webui.Dockerfile
+    ports:
+      - "8081:8888"
+    volumes:
+      - /home/sfournage/cat-adoption/webui:/usr/src/app/webui
+      - /usr/src/app/webui/node_modules
+
   database:
     container_name: db-cat-adoption
     image: postgres:15
